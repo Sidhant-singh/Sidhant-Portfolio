@@ -1,6 +1,8 @@
 // @flow strict
 
 import * as React from 'react';
+import Link from 'next/link';
+import { FaCode, FaPlay } from 'react-icons/fa';
 
 function ProjectCard({ project }) {
 
@@ -63,6 +65,26 @@ function ProjectCard({ project }) {
           </div>
           <div><span className="text-gray-400">{`};`}</span></div>
         </code>
+        <div className="mt-4 flex items-center gap-4">
+          {project.demo && (
+            <Link
+              href={project.demo}
+              target="_blank"
+              className="flex justify-center items-center w-9 h-9 rounded-full border-2 border-[#EFF3F4] text-[#EFF3F4] transition-all duration-300 hover:bg-[#231d4b] hover:text-violet-600 hover:border-[#0F0C41] hover:scale-110 no-underline"
+            >
+              <FaPlay />
+            </Link>
+          )}
+          {project.code && (
+            <Link
+              href={project.code}
+              target="_blank"
+              className="flex justify-center items-center w-9 h-9 rounded-full border-2 border-[#EFF3F4] text-[#EFF3F4] transition-all duration-300 hover:bg-[#231d4b] hover:text-violet-600 hover:border-[#0F0C41] hover:scale-110 no-underline"
+            >
+              <FaCode />
+            </Link>
+          )}
+        </div>
       </div>
     </div>
   );
