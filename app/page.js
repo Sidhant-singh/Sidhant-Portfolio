@@ -8,18 +8,28 @@ import HeroSection from "./components/homepage/hero-section";
 import Projects from "./components/homepage/projects";
 import Skills from "./components/homepage/skills";
 
+export const dynamic = 'force-dynamic';
+
 async function getData() {
-  const res = await fetch(`https://dev.to/api/articles?username=${personalData.devUsername}`)
-
-  if (!res.ok) {
-    throw new Error('Failed to fetch data')
+  if (!personalData.devUsername) {
+    return [];
   }
+  
+  try {
+    const res = await fetch(`https://dev.to/api/articles?username=${personalData.devUsername}`)
 
-  const data = await res.json();
+    if (!res.ok) {
+      return [];
+    }
 
-  const filtered = data.filter((item) => item?.cover_image).sort(() => Math.random() - 0.5);
+    const data = await res.json();
 
-  return filtered;
+    const filtered = data.filter((item) => item?.cover_image).sort(() => Math.random() - 0.5);
+
+    return filtered;
+  } catch (error) {
+    return [];
+  }
 };
 
 export default async function Home() {
